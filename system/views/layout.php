@@ -63,9 +63,16 @@
 <script src="../assets/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $('#btnsubmit').on('click', function(){
-        $.post('/login',{'login': $('#email').val(),'password':$('#password').val(),'chkbox':$('#chkbox').is(":checked"), 'btnsubmit':$('#btnsubmit').val()}, function(data){alert(data);}, 'text');
+        $.post('/login',{'login': $('#email').val(),'password':$('#password').val(),'chkbox':$('#chkbox').is(":checked"), 'btnsubmit':$('#btnsubmit').val()}, function(data){
+            if(data!='success')
+            {
+                $('#errors').html('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button><strong>Ошибка</strong> авторизации.</div>');
+            }
+            else
+            {
+                location.reload();
+            }}, 'text');
         $('#login').modal('hide');
-        //
     });</script>
 </body>
 </html>
